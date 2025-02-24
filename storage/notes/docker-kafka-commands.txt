@@ -1,0 +1,30 @@
+dock-kafka-1
+
+
+
+docker exec -it dock-kafka-1 kafka-topics --create --topic  customer-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+
+
+
+docker exec -it dock-kafka-1 kafka-console-producer --broker-list localhost:9092 --topic my-topic
+
+
+
+docker exec -it dock-kafka-1 kafka-console-consumer --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+
+
+
+docker exec -it dock-kafka-1 my-topic --list --zookeeper zookeeper:2181
+
+
+
+docker exec -it dock-kafka-1 kafka-topics --describe --topic my-topic --zookeeper zookeeper:2181
+
+
+
+docker exec -it dock-kafka-1 kafka-topics --list --bootstrap-server localhost:9092
+
+
+
+docker exec -it dock-kafka-1 kafka-topics --describe --topic my-topic --bootstrap-server localhost:9092
