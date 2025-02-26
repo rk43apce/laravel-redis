@@ -3,6 +3,7 @@
 use App\Http\Controllers\RedisController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KafkaController;
+use App\Http\Controllers\ConsistentHashingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,3 +26,5 @@ Route::get('/consume', [KafkaController::class, 'consume']);
 
 
 Route::get('/send-location', [KafkaController::class, 'sendMessage']);
+
+Route::get('/consistent-hashing', [ConsistentHashingController::class, 'index']);
