@@ -64,3 +64,88 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# Kafka Setup Instructions
+
+## Prerequisites
+- Ensure Docker and Docker Compose are installed on your system.
+- Download and set up a `docker-compose.yml` file for Kafka and Zookeeper.
+- Start the Kafka and Zookeeper containers using Docker Compose.
+
+## Start Kafka with Docker
+```sh
+docker-compose up -d
+```
+
+## Verify Kafka is Running
+Check running containers:
+```sh
+docker ps
+```
+Ensure Kafka and Zookeeper are listed as running.
+
+## Create Topics
+```sh
+docker exec -it kafka kafka-topics --create --topic my-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+docker exec -it dock-kafka-1 kafka-topics --create --topic my-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+docker exec -it dock-kafka-1 kafka-topics --create --topic my-topic-payment --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+```
+
+## List Topics
+```sh
+docker exec -it dock-kafka-1 kafka-topics --list --bootstrap-server localhost:9092
+```
+
+## Describe a Topic
+```sh
+docker exec -it dock-kafka-1 kafka-topics --describe --topic my-topic --bootstrap-server localhost:9092
+```
+
+## Produce Messages
+```sh
+docker exec -it dock-kafka-1 kafka-console-producer --broker-list localhost:9092 --topic my-topic-payment
+```
+Type messages and press `Enter` to send them.
+Press `CTRL+C` to exit.
+
+## Consume Messages
+```sh
+docker exec -it dock-kafka-1 kafka-console-consumer --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+
+docker exec -it dock-kafka-1 kafka-console-consumer --bootstrap-server localhost:9092 --topic my-topic-payment --from-beginning
+```
+Press `CTRL+C` to exit.
+
+## Stop Kafka and Zookeeper
+To stop containers:
+```sh
+docker-compose down
+```
+
+## Restart Kafka
+```sh
+docker-compose restart
+```
+
+## Cleanup
+To remove all containers and volumes:
+```sh
+docker-compose down -v
+```
+
+## Troubleshooting
+### Check Kafka Logs
+```sh
+docker logs dock-kafka-1
+```
+
+### Ensure Broker is Running
+```sh
+docker exec -it dock-kafka-1 kafka-broker-api-versions --bootstrap-server localhost:9092
+```
+If Kafka is not running, restart it using Docker Compose.
+
+
