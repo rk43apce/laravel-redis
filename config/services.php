@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    "lifetime" => env("SESSION_LIFETIME", 120),
+    "expire_on_close" => env("SESSION_EXPIRE_ON_CLOSE", false),
+    "expire" => env("SESSION_EXPIRE", false),
+    "expire_time" => env("SESSION_EXPIRE_TIME", 120),
+    "expire_time_on_close" => env("SESSION_EXPIRE_TIME_ON_CLOSE", 120)
+
 ];

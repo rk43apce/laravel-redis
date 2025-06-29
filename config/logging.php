@@ -127,6 +127,22 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'async' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/async.log'),
+            'level' => 'debug',
+        ],
+        'critical' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/critical.log'),
+            'level' => 'emergency',
+        ],
+         'redis_visitor' => [
+        'driver' => 'monolog',
+        'handler' => App\Logging\RedisVisitorLogHandler::class,
+        'level' => 'debug',
+    ],
+
     ],
 
 ];

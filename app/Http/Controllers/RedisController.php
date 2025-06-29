@@ -4,17 +4,61 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
-
+use App\Jobs\LogMessage;
+use Illuminate\Support\Facades\Log;
 class RedisController extends Controller
 {
     /**
      * Set a value in Redis.
      */
     public function setValue(Request $request)
-    {
+    {   
+
+
+
+
+        exit();
+
+        // Log::dispatch('User signed in',['request' => $request->all()]);
+        // Log::info('User signed in', ['request' => $request->all()]);
+
+                LogMessage::dispatch('User signed in',['request' => $request->all()]);
+
+
+//                 session()->put('user_id', "123456");
+// session()->save();
+
+
+// $sessionId = session()->getId();
+
+
+
+// Redis::expire($sessionId, 36); 
+
+//
+
+
+//         session()->put('user_id', "123456");
+// session()->save();
+
+// $sessionId = session()->getId();
+// $sessionKey = "laravel:session:$sessionId";
+
+
+//         Redis::expire($sessionKey, 3600); 
+
+//         session()->save();
+
+// $ttl = Redis::ttl("$sessionKey");
+
+
+        // LogMessage::dispatch('User signed in',['request' => $request->all()]);
+
         // Optionally, you can get key/value from request parameters
-        Redis::set('my_key', 'Hello from Redis!');
-        return response()->json(['message' => 'Value set successfully in Redis']);
+        // Redis::set('my_key', 'Hello from Redis!');
+        // return response()->json(['message' => 'Value set successfully in Redis']);
+
+        // return response()->json(['message' => "Session expires in $ttl seconds"]);
     }
 
     /**
@@ -28,9 +72,22 @@ class RedisController extends Controller
 
     function getConfig() {
         
-        $client = Redis::client();
-        $config = $client->config('GET', '*');
-        return response()->json(['config' => $config]);
+        // $client = Redis::client();
+        // $config = $client->config('GET', '*');
+        
+        for ($i=0; $i < 100; $i++)
+        { 
+             $product_id   = rand(1000, 9999);
+
+            \Log::info('User viewed product', [
+                'product_id' => $product_id,
+                'category' => 'shoes'
+            ]);
+            
+            print_r("User viewed product: $product_id\n");
+        }
+
+        return response()->json(['product_id' => rand()]);
     }
 
     function getKeys() {
