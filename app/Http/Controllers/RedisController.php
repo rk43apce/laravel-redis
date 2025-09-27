@@ -73,7 +73,7 @@ class RedisController extends Controller
     function getConfig() {
         
         // $client = Redis::client();
-        // $config = $client->config('GET', '*');
+
         
         for ($i=0; $i < 100; $i++)
         { 
