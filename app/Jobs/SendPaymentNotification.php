@@ -21,6 +21,9 @@ class SendPaymentNotification implements ShouldQueue
     {
         // Example: send webhook to merchant
 
+
+        echo "Sending payment notification for transaction ID: " . "\n";
+
         echo "Successfully sent payment notification for transaction ID: " ."\n";
 
         return true;
